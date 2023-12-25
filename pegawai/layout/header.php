@@ -157,7 +157,7 @@ require_once '../../config.php'
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <a href="./profile.html" class="dropdown-item">Profile</a>
                 <a href="#" class="dropdown-item">Ubah Password</a>
-                <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                <a href="<?php echo base_url('auth/logout.php')?>" class="dropdown-item">Logout</a>
               </div>
             </div>
           </div>
@@ -202,7 +202,7 @@ require_once '../../config.php'
 
 
                 <li class="nav-item">
-                  <a class="nav-link" href="./icons.html" >
+                  <a class="nav-link" href="<?php echo base_url('auth/logout.php')?>" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/ghost -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
                     </span>

@@ -1,6 +1,13 @@
-<?php include('../layout/header.php') ?>
+<?php 
+session_start();
 
-
+if(!isset($_SESSION["login"])) {
+  header("location: ../../auth/login.php?pesan=belum_login");
+}else if($_SESSION["role"] !='pegawai'){
+  header("location: ../../auth/login.php?pesan=tolak_akses");
+}
+include('../layout/header.php') 
+?>
 
         <!-- Page body -->
         <div class="page-body">
@@ -97,8 +104,7 @@
             </div>
           </div>
         </div>
-        
-        
+            
 <?php include('../layout/footer.php') ?>
 
 
