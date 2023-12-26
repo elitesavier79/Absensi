@@ -3,7 +3,6 @@
 session_start();
 
 require_once('../config.php');
-
 if(isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -41,7 +40,6 @@ if(isset($_POST["login"])) {
         $_SESSION["gagal"]= "Username salah, silakan coba lagi";
     }
 }
-
 ?>
 <!doctype html>
 <!--
@@ -77,8 +75,7 @@ if(isset($_POST["login"])) {
     </style>
   </head>
   <body  class=" d-flex flex-column">
-    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
-    <div class="page page-center">
+       <div class="page page-center">
       <div class="container container-normal py-4">
         <div class="row align-items-center g-4">
           <div class="col-lg">
@@ -88,6 +85,7 @@ if(isset($_POST["login"])) {
               </div>
 
                 <?php 
+           
                 if(isset($_GET['pesan'])){
                     if($_GET['pesan'] == "belum_login") {
                         $_SESSION['gagal'] = 'anda belum Login';
@@ -95,6 +93,7 @@ if(isset($_POST["login"])) {
                         $_SESSION['gagal'] = 'Akses di tolak';
                     }
                 }
+             
                 ?>
 
               <div class="card card-md">
@@ -148,7 +147,7 @@ if(isset($_POST["login"])) {
     <!-- Sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <?php if($_SESSION['gagal']) { ?>
+    <?php if(isset($_SESSION['gagal'])): ?>
         <script>
             Swal.fire({ 
             icon: "error",
@@ -157,7 +156,8 @@ if(isset($_POST["login"])) {
             
             });
         </script>
+
         <?php unset($_SESSION['gagal']); ?>
-    <?php } ?>
+    <?php endif; ?>
 </body>
 </html>

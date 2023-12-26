@@ -145,5 +145,75 @@
     <script src="<?php echo base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- alert validasi -->
+     <?php if (isset($_SESSION['validasi'])): ?>
+        <script>
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "bottom-start",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "error",
+            title: "<?php echo $_SESSION['validasi'] ?>"
+          });
+        </script>
+      <?php unset($_SESSION['validasi']);?>
+      <?php endif;?>
+
+      <!-- alert berhasil -->
+     <?php if (isset($_SESSION['berhasil'])): ?>
+        <script>
+          const Berhasil = Swal.mixin({
+            toast: true,
+            position: "bottom-start",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Berhasil.fire({
+            icon: "success",
+            title: "<?php echo $_SESSION['berhasil'] ?>"
+          });
+        </script>
+      <?php unset($_SESSION['berhasil']);?>
+      <?php endif;?>
+
+        <!-- alert komfirmasi hapus data -->
+        <script>
+          $('.delete-data').on('click', function() {
+            var getLink = $(this).attr('href');
+            Swal.fire({
+            title: "Yakin dihapus?",
+            text: "Data yang sudah dihapus tidak bisa dikembalikan !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, Hapus!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+        });
+        </script>
+
   </body>
 </html>

@@ -7,7 +7,7 @@ if(!isset($_SESSION["login"])) {
 }else if($_SESSION["role"] !='admin'){
   header("location: ../../auth/login.php?pesan=tolak_akses");
 }
-
+$judul= "Dashboard";
 include('../layout/header.php');
 
 ?>
