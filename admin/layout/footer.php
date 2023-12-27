@@ -141,6 +141,10 @@
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/maps/world.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/maps/world-merc.js?1684106062') ?>" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
     <!-- Tabler Core -->
     <script src="<?php echo base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
@@ -191,13 +195,13 @@
       <?php unset($_SESSION['berhasil']);?>
       <?php endif;?>
 
-        <!-- alert komfirmasi hapus data -->
+        <!-- alert komfirmasi hapus data menggunakan jquery-->
         <script>
           $('.delete-data').on('click', function() {
             var getLink = $(this).attr('href');
             Swal.fire({
-            title: "Yakin dihapus?",
-            text: "Data yang sudah dihapus tidak bisa dikembalikan !",
+            title: "Yakin mau dihapus?",
+            text: "Data yang sudah dihapus tidak bisa dikembalikan!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -205,13 +209,10 @@
             confirmButtonText: "Ya, Hapus!"
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+              window.location.href = getLink
             }
           });
+          return false;
         });
         </script>
 
