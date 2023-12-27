@@ -1,5 +1,4 @@
 <?php 
-
 session_start();
 
 if(!isset($_SESSION["login"])) {
@@ -12,8 +11,6 @@ include('../layout/header.php');
 require_once('../../config.php');
 
 $result = mysqli_query($connection, "SELECT * FROM jabatan ORDER BY id DESC");
-
-
 
 ?>
         <div class="page-body">

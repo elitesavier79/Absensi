@@ -12,7 +12,7 @@ $judul = "Form Edit Data Jabatan";
 include('../layout/header.php');
 require_once('../../config.php');
 
-if(isset($_POST['submit'])){
+if(isset($_POST['update'])){
     $id = $_POST['id'];
     $jabatan = htmlspecialchars($_POST['jabatan']);
 
@@ -52,7 +52,7 @@ While($jabatan = mysqli_fetch_array($result)) {
                             <input type="text" class="form-control" name="jabatan" value="<?php echo $nama_jabatan ?> ">
                         </div>
                         
-                        <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" name="update" class="btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
