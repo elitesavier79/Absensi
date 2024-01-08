@@ -1,3 +1,4 @@
+
 <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">
             <div class="row text-center align-items-center flex-row-reverse">
@@ -141,9 +142,28 @@
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/js/jsvectormap.min.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/maps/world.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/libs/jsvectormap/dist/maps/world-merc.js?1684106062') ?>" defer></script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
     <!-- Tabler Core -->
     <script src="<?php echo base_url('assets/js/tabler.min.js?1684106062') ?>" defer></script>
     <script src="<?php echo base_url('assets/js/demo.min.js?1684106062') ?>" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php if(isset($_SESSION['gagal'])): ?>
+        <script>
+            Swal.fire({ 
+            icon: "error",
+            title: "Oops...",
+            text: "<?php echo $_SESSION['gagal']; ?>",
+            
+            });
+        </script>
+
+        <?php unset($_SESSION['gagal']); ?>
+    <?php endif; ?>
 
   </body>
 </html>
+

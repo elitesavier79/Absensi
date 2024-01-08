@@ -6,7 +6,30 @@ if(!isset($_SESSION["login"])) {
 }else if($_SESSION["role"] !='pegawai'){
   header("location: ../../auth/login.php?pesan=tolak_akses");
 }
-include('../layout/header.php') 
+include('../layout/header.php'); 
+include_once("../../config.php");
+
+$lokasi_absensi = $_SESSION['lokasi_absensi'];
+$result = mysqli_query($connection, "SELECT * FROM lokasi_absensi WHERE nama_lokasi = '$lokasi_absensi'");
+
+while($lokasi = mysqli_fetch_array($result)) {
+  $latitude_kantor = $lokasi['latitude'];
+  $longitude_kantor = $lokasi['longitude'];
+  $radius = $lokasi['radius'];
+  $zona_waktu = $lokasi['zona_waktu'];
+ 
+}
+
+
+
+if($zona_waktu == 'WIB') {
+  date_default_timezone_set('Asia/Jakarta');
+}elseif($zona_waktu == 'WITA') {
+  date_default_timezone_set('Asia/Makassar');
+}elseif($zona_waktu == 'WIT'){
+  date_default_timezone_set('Asia/Jayapura');
+}
+
 ?>
 
 <style>
@@ -53,8 +76,16 @@ include('../layout/header.php')
                         <div>:</div>
                         <div id="detik_masuk"></div>
                       </div>
-                      <form action="">
-                           <button type="submit" class="btn btn-success mt-2">Masuk</button>
+                      <form action="<?php echo base_url('pegawai/absensi/absensi_masuk.php')?>" method="POST">
+                      <input type="" name="latitude_pegawai" id="latitude_pegawai">
+                      <input type="" name="longitude_pegawai" id="longitude_pegawai">
+                      <input type="" name="latitude_kantor" value="<?php echo $latitude_kantor?>">
+                      <input type="" name="longitude_kantor" value="<?php echo $longitude_kantor?>">
+                      <input type="hidden" name="radius" value="<?php echo $radius?>">
+                      <input type="hidden" name="zona_waktu" value="<?php echo $zona_waktu ?>">
+                      <input type="hidden" name="tanggal_masuk" value="<?php echo date('Y-m-d') ?>">
+                      <input type="hidden" name="jam_masuk" value="<?php echo date('H:i:s') ?>">
+                           <button type="submit" name="tombol_masuk" class="btn btn-success mt-2">Masuk</button>
                       </form>
                  </div>   
                  
@@ -79,7 +110,7 @@ include('../layout/header.php')
                         <div>:</div>
                         <div id="detik_keluar"></div>
                       </div>
-                      <form action="">
+                      <form action="<?php echo base_url('pegawai/absensi/absensi_masuk.php')?>">
                            <button type="submit" class="btn btn-danger mt-2">Keluar</button>
                       </form>
                  </div>                   
@@ -119,6 +150,23 @@ include('../layout/header.php')
       document.getElementById("menit_keluar").innerHTML = waktu.getMinutes();
       document.getElementById("detik_keluar").innerHTML = waktu.getSeconds();
   }
+  //mengambil posisi karyawan saat ini
+  getlocation();
+
+  function getlocation() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }else{
+      alert("Browser Anda tidak memdukung")
+    }
+  }
+
+  function showPosition(position) {
+    $('#latitude_pegawai').val(position.coords.latitude);
+    $('#longitude_pegawai').val(position.coords.longitude);
+  }
+
+
 </script>
 
 <?php include('../layout/footer.php') ?>
