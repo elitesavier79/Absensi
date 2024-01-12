@@ -1,3 +1,17 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+<style>
+    #map{
+        height: 300px;
+    }
+</style>
+
 <?php 
 session_start();
 
@@ -11,6 +25,7 @@ include('../layout/header.php');
 require_once('../../config.php');
 
 $id = $_GET['id'];
+
 $result = mysqli_query($connection, "SELECT * FROM lokasi_absensi WHERE id=$id");
 
 ?>
@@ -67,7 +82,7 @@ $result = mysqli_query($connection, "SELECT * FROM lokasi_absensi WHERE id=$id")
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1813.7383580116127!2d<?php echo$lokasi['longitude']?>!3d<?php echo$lokasi['latitude']?>!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e22c0daa94b5501%3A0x8238d730aaca9b7d!2sGedung%20Setia%20Bhakti%20Pasir%20Putih!5e0!3m2!1sen!2sid!4v1703689263066!5m2!1sen!2sid" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div id="map"></div>
                         </div>
                     </div>
                 </div>
@@ -76,6 +91,19 @@ $result = mysqli_query($connection, "SELECT * FROM lokasi_absensi WHERE id=$id")
         </div>
     </div>
 <?php endwhile; ?>
+
+<script>
+
+   
+
+     let map = L.map('map').setView([ -2.129281618991526, 106.11606181165806], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    var marker = L.marker([-2.129281618991526, 106.11606181165806]).addTo(map);
+</script>
 
 <?php include('../layout/footer.php') ?>
 

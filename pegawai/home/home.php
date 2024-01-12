@@ -123,7 +123,7 @@ if($zona_waktu == 'WIB') {
     
         
 <script>
-  // set waktu untuk waktu masu
+  // set waktu untuk waktu masuk
   window.setTimeout("waktuMasuk()", 1000);
   namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
   function waktuMasuk() {
