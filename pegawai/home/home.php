@@ -77,10 +77,10 @@ if($zona_waktu == 'WIB') {
                         <div id="detik_masuk"></div>
                       </div>
                       <form action="<?php echo base_url('pegawai/absensi/absensi_masuk.php')?>" method="POST">
-                      <input type="" name="latitude_pegawai" id="latitude_pegawai">
-                      <input type="" name="longitude_pegawai" id="longitude_pegawai">
-                      <input type="" name="latitude_kantor" value="<?php echo $latitude_kantor?>">
-                      <input type="" name="longitude_kantor" value="<?php echo $longitude_kantor?>">
+                      <input type="hidden" name="latitude_pegawai" id="latitude_pegawai">
+                      <input type="hidden" name="longitude_pegawai" id="longitude_pegawai">
+                      <input type="hidden" name="latitude_kantor" value="<?php echo $latitude_kantor?>">
+                      <input type="hidden" name="longitude_kantor" value="<?php echo $longitude_kantor?>">
                       <input type="hidden" name="radius" value="<?php echo $radius?>">
                       <input type="hidden" name="zona_waktu" value="<?php echo $zona_waktu ?>">
                       <input type="hidden" name="tanggal_masuk" value="<?php echo date('Y-m-d') ?>">

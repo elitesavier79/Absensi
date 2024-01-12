@@ -10,9 +10,9 @@ include_once("../../config.php");
 
 
 $file_foto = $_POST['photo'];
-$id_pegawai = 2;
-$tanggal_masuk = date('Y-m-d');
-$jam_masuk = date('H:i:s');
+$id_pegawai = $_POST['id'];
+$tanggal_masuk = $_POST['tanggal_masuk'];
+$jam_masuk = $_POST['jam_masuk'];
 
 $foto = $file_foto;
 $foto = str_replace('data:image/jpeg;base64,', '', $foto);
@@ -27,7 +27,7 @@ $result = mysqli_query($connection, "INSERT INTO absensi(id_pegawai, tanggal_mas
 
 
 if($result) {
-    $_SESSION['berhasil'] = "Anda telah berhasil melakukan absen masuk";
+    $_SESSION['berhasil'] = "Absensi masuk berhasil";
 }else {
     $_SESSION['gagal'] = "Absensi masuk gagal dilakukan";
 }

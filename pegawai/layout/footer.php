@@ -164,6 +164,28 @@
         <?php unset($_SESSION['gagal']); ?>
     <?php endif; ?>
 
+    <?php if (isset($_SESSION['berhasil'])): ?>
+        <script>
+          const Berhasil = Swal.mixin({
+            toast: true,
+            position: "bottom-start",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Berhasil.fire({
+            icon: "success",
+            title: "<?php echo $_SESSION['berhasil'] ?>"
+          });
+        </script>
+      <?php unset($_SESSION['berhasil']);?>
+      <?php endif;?>
+   
+
   </body>
 </html>
 

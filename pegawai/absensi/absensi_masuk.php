@@ -32,7 +32,7 @@ $mil = $jarak * 60 * 1.1515;
 $km = $mil * 1.609344;
 $m = $km * 1000;
  
-echo $m;
+
 ?>
 <?php if($m > $radius) { ?>
     <?php echo
@@ -56,8 +56,10 @@ echo $m;
                 <div class="col-md-6">
                     <div class="card text-center">
                         <div class="card-body" style="margin: auto;">
-                            
-                        <div id="my_camera" style="width:320px; height:240px;"></div>
+                        <input type="hidden" id="id" value="<?php echo $_SESSION['id']?>">
+                        <input type="hidden" id="tanggal_masuk" value="<?php echo $tanggal_masuk?>">
+                        <input type="hidden" id="jam_masuk" value="<?php echo $jam_masuk?>">
+                        <div id="my_camera"></div>
                         <div id="my_result"></div>
                         <div><?php echo date('d F Y', strtotime($tanggal_masuk)). ' - ' . $jam_masuk ?></div>
                         <button class="btn btn-primary mt-2" id="take-foto">Masuk</button>
@@ -70,10 +72,7 @@ echo $m;
             </div>
         </div>
     </div>
-
-
-<?php }?>
-<script language="JavaScript">
+    <script language="JavaScript">
     Webcam.set({
     width: 320,
     height: 240,
@@ -86,6 +85,11 @@ echo $m;
 
     Webcam.attach( '#my_camera' );
         document.getElementById('take-foto').addEventListener('click', function() {
+
+            let id = document.getElementById('id').value;
+            let tanggal_masuk = document.getElementById('tanggal_masuk').value;
+            let jam_masuk = document.getElementById('jam_masuk').value;
+
             Webcam.snap( function(data_uri) {
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
@@ -97,7 +101,10 @@ echo $m;
                 xhttp.open("POST", "absensi_masuk_aksi.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send(
-                    'photo=' + encodeURIComponent(data_uri)
+                    'photo=' + encodeURIComponent(data_uri) + 
+                    '&id=' + id +
+                    '&tanggal_masuk=' + tanggal_masuk +
+                    '&jam_masuk=' + jam_masuk
                 );   
             
         } );
@@ -106,4 +113,7 @@ echo $m;
 </script>
 
 <script src="webcam.js"></script>
+
+<?php }?>
+
 <?php include('../layout/footer.php') ?>
